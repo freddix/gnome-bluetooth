@@ -1,11 +1,12 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
 Version:	3.6.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.6/%{name}-%{version}.tar.xz
 # Source0-md5:	0efd662c199d20559d82b0a5f8bd8bc0
+Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://live.gnome.org/GnomeBluetooth
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -24,8 +25,8 @@ Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	bluez
+Requires:	gvfs-obexftp
 Requires:	obexd
-Obsoletes:	bluez-gnome
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -104,6 +105,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*/*/*.la
 
 %find_lang %{name} --with-gnome --with-omf --all-name
 
+install -D %{SOURCE1} \
+	$RPM_BUILD_ROOT%{_prefix}/lib/udev/rules.d//61-gnome-bluetooth-rfkill.rules
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -128,9 +132,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*/apps/*
 %{_iconsdir}/hicolor/*/status/*
 %{_sysconfdir}/xdg/autostart/bluetooth-applet.desktop
-%{_datadir}/GConf/gsettings/gnome-bluetooth-nst
 %{_datadir}/glib-2.0/schemas/org.gnome.Bluetooth.nst.gschema.xml
-
+%{_prefix}/lib/udev/rules.d//61-gnome-bluetooth-rfkill.rules
 %{_mandir}/man1/bluetooth-*.1*
 
 %files libs
