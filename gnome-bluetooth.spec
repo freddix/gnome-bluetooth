@@ -1,11 +1,11 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
-Version:	3.6.1
-Release:	1
+Version:	3.7.4
+Release:	2
 License:	GPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.6/%{name}-%{version}.tar.xz
-# Source0-md5:	a3b0b6c2c542b3264cb0144a4efb3342
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.7/%{name}-%{version}.tar.xz
+# Source0-md5:	980a5a00a364af7207ee9fb4160ea9a6
 Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://live.gnome.org/GnomeBluetooth
 BuildRequires:	autoconf
@@ -24,9 +24,8 @@ Requires(post,postun):	/usr/bin/gtk-update-icon-cache
 Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	bluez
+Requires:	bluez4
 Requires:	gvfs-obexftp
-Requires:	obexd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -57,15 +56,6 @@ Requires:	gtk-doc-common
 
 %description apidocs
 GNOME Bluetooth API documentation.
-
-%package -n nautilus-sendto-bluetooth
-Summary:	nautilus-sendto Bluetooth plugin
-License:	LGPL
-Group:		X11/Applications
-Requires:	nautilus
-
-%description -n nautilus-sendto-bluetooth
-nautilus-sendto Bluetooth plugin.
 
 %prep
 %setup -q
@@ -131,8 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/apps/*
 %{_iconsdir}/hicolor/*/status/*
-%{_sysconfdir}/xdg/autostart/bluetooth-applet.desktop
-%{_datadir}/glib-2.0/schemas/org.gnome.Bluetooth.nst.gschema.xml
 %{_prefix}/lib/udev/rules.d//61-gnome-bluetooth-rfkill.rules
 %{_mandir}/man1/bluetooth-*.1*
 
@@ -159,8 +147,4 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/%{name}
-
-%files -n nautilus-sendto-bluetooth
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/nautilus-sendto/plugins/libnstbluetooth.so
 
