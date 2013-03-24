@@ -1,11 +1,11 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
-Version:	3.7.4
-Release:	2
+Version:	3.7.92
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.7/%{name}-%{version}.tar.xz
-# Source0-md5:	980a5a00a364af7207ee9fb4160ea9a6
+# Source0-md5:	556f46102cf360a63c5b78394ab2f488
 Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://live.gnome.org/GnomeBluetooth
 BuildRequires:	autoconf
