@@ -1,11 +1,11 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
-Version:	3.7.92
+Version:	3.8.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.7/%{name}-%{version}.tar.xz
-# Source0-md5:	556f46102cf360a63c5b78394ab2f488
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.8/%{name}-%{version}.tar.xz
+# Source0-md5:	6c3e01ee8e0aa716013e1594038041df
 Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://live.gnome.org/GnomeBluetooth
 BuildRequires:	autoconf
@@ -93,7 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@shaw,mus}
 rm -f $RPM_BUILD_ROOT%{_libdir}/*/*/*.la
 
-%find_lang %{name} --with-gnome --with-omf --all-name
+%find_lang %{name} --with-gnome --all-name
 
 install -D %{SOURCE1} \
 	$RPM_BUILD_ROOT%{_prefix}/lib/udev/rules.d//61-gnome-bluetooth-rfkill.rules
