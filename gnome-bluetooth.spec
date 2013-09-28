@@ -1,11 +1,11 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
-Version:	3.8.1
+Version:	3.10.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	a45c401daa15937a31c59d49943c59db
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.10/%{name}-%{version}.tar.xz
+# Source0-md5:	c112cdca037f90168b04c0f12855006a
 Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://live.gnome.org/GnomeBluetooth
 BuildRequires:	autoconf
@@ -18,13 +18,12 @@ BuildRequires:	intltool
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool
 BuildRequires:	nautilus-devel
-BuildRequires:	nautilus-sendto-devel
 BuildRequires:	pkg-config
 Requires(post,postun):	/usr/bin/gtk-update-icon-cache
 Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	bluez4
+Requires:	bluez
 Requires:	gvfs-obexftp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -61,16 +60,16 @@ GNOME Bluetooth API documentation.
 %setup -q
 
 # kill gnome common deps
-sed -i -e 's/GNOME_COMPILE_WARNINGS.*//g'	\
+%{__sed} -i -e 's/GNOME_COMPILE_WARNINGS.*//g'	\
     -i -e 's/GNOME_MAINTAINER_MODE_DEFINES//g'	\
     -i -e 's/GNOME_COMMON_INIT//g'		\
     -i -e 's/GNOME_CXX_WARNINGS.*//g'		\
     -i -e 's/GNOME_DEBUG_CHECK//g' configure.ac
 
 %build
+%{__libtoolize}
 %{__gtkdocize}
 %{__intltoolize}
-%{__libtoolize}
 %{__aclocal}
 %{__autoheader}
 %{__automake}
