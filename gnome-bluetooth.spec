@@ -1,7 +1,7 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
 Version:	3.10.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.10/%{name}-%{version}.tar.xz
@@ -24,7 +24,6 @@ Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	bluez
-Requires:	gvfs-obexftp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
