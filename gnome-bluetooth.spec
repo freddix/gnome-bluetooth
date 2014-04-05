@@ -1,24 +1,26 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
-Version:	3.10.0
-Release:	2
+Version:	3.12.0
+Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	c112cdca037f90168b04c0f12855006a
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	c23666aa1d0bfc37be38f45493679de2
 Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://live.gnome.org/GnomeBluetooth
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
-BuildRequires:	gobject-introspection-devel
-BuildRequires:	gtk+3-devel
+BuildRequires:	gobject-introspection-devel >= 1.40.0
+BuildRequires:	gtk+3-devel >= 3.12.0
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
+BuildRequires:	itstool
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool
-BuildRequires:	nautilus-devel
+BuildRequires:	nautilus-devel >= 3.12.0
 BuildRequires:	pkg-config
+BuildRequires:	udev-devel
 Requires(post,postun):	/usr/bin/gtk-update-icon-cache
 Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	hicolor-icon-theme
@@ -65,6 +67,9 @@ GNOME Bluetooth API documentation.
     -i -e 's/GNOME_CXX_WARNINGS.*//g'		\
     -i -e 's/GNOME_DEBUG_CHECK//g' configure.ac
 
+%{__sed} -i 's/$(LIBGNOMEBT_LIBS)/$(LIBGNOMEBT_LIBS) -lm/' \
+    lib/Makefile.am
+
 %build
 %{__libtoolize}
 %{__gtkdocize}
@@ -88,8 +93,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@shaw,mus}
-rm -f $RPM_BUILD_ROOT%{_libdir}/*/*/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/en@shaw
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -114,7 +119,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/%{name}/plugins/libgbtgeoclue.so
 %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/apps/*
@@ -124,20 +128,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/plugins
-# no %ghost here!
-%attr(755,root,root) %{_libdir}/%{name}/libgnome-bluetooth-applet.so.?
 %attr(755,root,root) %ghost %{_libdir}/libgnome-bluetooth.so.??
-%attr(755,root,root) %{_libdir}/%{name}/libgnome-bluetooth-applet.so.*.*.*
 %attr(755,root,root) %{_libdir}/libgnome-bluetooth.so.*.*.*
 %{_libdir}/girepository-1.0/*.typelib
-%{_libdir}/gnome-bluetooth/*.typelib
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so
-%attr(755,root,root) %{_libdir}/%{name}/*.so
 %{_includedir}/%{name}
 %{_pkgconfigdir}/gnome-bluetooth-1.0.pc
 %{_datadir}/gir-1.0/GnomeBluetooth-1.0.gir
