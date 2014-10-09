@@ -1,24 +1,23 @@
 Summary:	GNOME Bluetooth
 Name:		gnome-bluetooth
-Version:	3.12.0
+Version:	3.14.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	c23666aa1d0bfc37be38f45493679de2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.14/%{name}-%{version}.tar.xz
+# Source0-md5:	3f142aa7303e76daf7938e15f54a1894
 Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://live.gnome.org/GnomeBluetooth
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
-BuildRequires:	gobject-introspection-devel >= 1.40.0
-BuildRequires:	gtk+3-devel >= 3.12.0
+BuildRequires:	gobject-introspection-devel >= 1.42.0
+BuildRequires:	gtk+3-devel >= 3.14.0
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool
-BuildRequires:	nautilus-devel >= 3.12.0
 BuildRequires:	pkg-config
 BuildRequires:	udev-devel
 Requires(post,postun):	/usr/bin/gtk-update-icon-cache
